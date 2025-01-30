@@ -1,5 +1,5 @@
 # Welcome to my Nix flake!
-
+![](/assets/desktop.png)
 This is my repo I use to store my flake for my NixOS and non-NixOS systems, it includes a home-manager configuration that (should) work both standalone and as a NixOS module, which manages an MPD server, swayfx (hyprland has godawful vram management and i will die on this hill), waybar, and some other stuff that I can't think of on the top of my head lmao
 
 ## PLEASE NOTE ALL MY BINDINGS ARE MADE WITH THE [COLEMAK](https://colemak.org) KEYBOARD LAYOUT IN MIND AS I USE IT ON MY MACHINES
@@ -11,6 +11,7 @@ The home directory is where all the home-manager configuration goes and everythi
 
 ### /home/
 In here, there is a default.nix file which should work as a standalone home-manager config and is the entrypoint for it
+
 packages.nix - general packages not managed by home-manager but I want to be installed by it as it is graphical or a hm-configured thing uses it
 
 swayfx - This is where the swayfx-specific stuff goes as I cannot declaratively configure this due to the nature of home-manager
@@ -23,6 +24,9 @@ theming.nix - This is the file I use for general theme configuration.
 This directory stores my waybar configuration. It is not configured in Nix as I am endlessly tweaking it and do not wish to rebuild for every change.
 
 Please note that I have specifically used mkOutOfStoreSymlink to configure waybar's files so I do not need to rebuild for any change.
+
+~~also im pretty proud of my waybar config~~
+![](/assets/waybar.gif)
 
 ### /base/
 This directory has many different Nix files that I import based on what I want or don't want in my configuration.

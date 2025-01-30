@@ -63,7 +63,7 @@
     enable = true;
     wifi.backend = "iwd";
   };
-
+  programs.gphoto2.enable = true;
   # Set your time zone.
   time.timeZone = "Australia/Perth";
 
@@ -146,7 +146,7 @@
   users.users.maya = {
     isNormalUser = true;
     description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" ];
     packages = with pkgs; [
     #  thunderbird
     ];

@@ -56,5 +56,17 @@
       user.signingkey = "~/.ssh/id_ed25519.pub";
       init.defaultBranch = "main";
     };
-  }; 
+  };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+    ];
+  };
 }

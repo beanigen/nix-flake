@@ -37,6 +37,7 @@
     vlc
     playerctl
     firefox
+    v4l-utils
     libreoffice
   ];
 }

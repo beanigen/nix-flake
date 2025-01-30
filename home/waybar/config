@@ -9,7 +9,7 @@
     "position": "top",
     "modules-center": ["group/mpdg"],
     "modules-left": ["group/dtray"],
-    "modules-right": ["clock", "wireplumber"],
+    "modules-right": ["battery", "battery#bat1", "battery#bat2", "clock", "wireplumber"],
 
 
     "group/dtray": {
@@ -59,6 +59,21 @@
       "format-disconnected": "MPD seems to be down",
       "format": "{title} - {album} - {artist}",
       "format-paused": "{title} - {album} - {artist}",
+    },
+    "battery": {
+      "bat": "BAT0",
+      "interval": 5,
+      "format-icons": [" ", " ", " ", " ", " "],
+      "format": "{icon} {capacity}%",
+      "tooltip-format": "BAT0, {power}W"
+    },
+    "battery#bat1": {
+      "bat": "BAT1",
+      "tooltip-format": "BAT1, {power}W"
+    },
+    "battery#bat2": {
+      "bat": "BAT2",
+      "tooltip-format": "BAT2, {power}W"
     },
   }
 ]

@@ -10,9 +10,12 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
-  boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vhost-net" ];
-  boot.extraModulePackages = [ ];
-  boot.extraModprobeConfig = "options vfio-pci ids=10de:2184,10de:1aeb,10de:1aec,10de:1aed,1b21:1242";
+  boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vhost-net" "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options vfio-pci ids=10de:2184,10de:1aeb,10de:1aec,10de:1aed,1b21:1242
+    options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam, Virt Cam" exclusive_caps=1
+  '';
   boot.blacklistedKernelModules = ["nouveau"];
   boot.kernelParams = [ "amdgpu.ppfeaturemask=0xffffffff" "intel_iommu=on" "iommu=pt" "pcie_acs_override=downstream,multifunction" "preempt=voluntary" "module_blacklist=nouveau" ];
 

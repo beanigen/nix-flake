@@ -60,6 +60,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    configPackages = [ pkgs.xdg-desktop-portal-wlr ];
   };
   programs.obs-studio = {
     enable = true;
@@ -69,4 +70,24 @@
       obs-pipewire-audio-capture
     ];
   };
+   programs.nvf = {
+      enable = true;
+      settings.vim = {
+        statusline.lualine = {
+          enable = true;
+          theme = "dracula";
+        };
+        autocomplete.nvim-cmp.enable = true;
+        languages = {
+	       enableFormat = true;
+	       enableLSP = true;
+          #enableTreesitter = true; disabled until it fixes itself
+	       nix.enable = true;
+	       clang.enable = true;
+	       html.enable = true;
+          css.enable = true;
+	       python.enable = true;
+	     };
+      };
+    };
 }

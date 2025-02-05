@@ -11,6 +11,7 @@
     emacs
     comma
     openscad
+    nixgl.nixGLIntel
     openutau
     wlr-randr
     grim

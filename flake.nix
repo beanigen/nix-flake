@@ -33,6 +33,17 @@
       ];
     };
     #other confs go here, cant be assed rn
+    homeConfigurations.generic = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs { system = "x86_64-linux"; overlays = [inputs.nixgl.overlay]; };
+      modules = [ ./home ];
+      extraSpecialArgs = { 
+        inherit inputs; 
+        vars = {
+          isNixOS = false;
+          class = "laptop";
+        };
+      };
+    };
 
   };
 }

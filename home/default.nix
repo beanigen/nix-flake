@@ -10,7 +10,7 @@
     ./packages.nix #general user packages not managed by home-manager but i want to install via hm anyways
   ];
   home = rec {
-    username = "maya";
+    username = vars.user; #this is set in flake.nix 
     homeDirectory = "/home/${username}"; #change this if you use a non-standard home dir
     stateVersion = "23.11";
     file = {
@@ -18,11 +18,11 @@
       ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/.config/nixos/home/waybar/style.css";
     };
   };
-  programs.home-manager.enable = (if vars.isNixOS then false else true); #value is set in flake.nix
+  programs.home-manager.enable = (!vars.isNixOS); #value is set in flake.nix
   programs.foot = {
     enable = true;
     settings.main.font = "monospace:size=10";
-    settings.colors.alpha = "0.8";
+    #settings.colors.alpha = "0.8";
   };
   programs.ncmpcpp = {
     enable = true;
@@ -32,7 +32,7 @@
   };
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/maya/Music"; #TODO: figure out not hardcoding this
+    musicDirectory = "/home/${vars.user}/Music";
     extraConfig = ''
       audio_output {
         type "pipewire"

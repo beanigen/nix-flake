@@ -1,4 +1,4 @@
-{pkgs, ...}:{
+{pkgs, vars, ...}:{
   home.packages = with pkgs; [
     prismlauncher
     libgpod
@@ -11,7 +11,6 @@
     emacs
     comma
     openscad
-    nixgl.nixGLIntel
     openutau
     wlr-randr
     grim
@@ -40,5 +39,5 @@
     firefox
     v4l-utils
     libreoffice
-  ];
+  ] ++ (if !vars.isNixOS then [nixgl.nixGLIntel] else []);
 }

@@ -50,8 +50,8 @@
       workspaceLayout = "default";
       keybindings = lib.mkOptionDefault {
         "Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/screenshot-`date +%F-%T`.png";
-        "Mod4+d" = "exec foot --title launch --app-id fzf-launcher bash -c 'compgen -c | sort -u | fzf | xargs swaymsg exec --'";
-	"Mod4+t" = "exec foot --title music --app-id mpd-control ncmpcpp";
+        "Mod4+d" = "exec foot --title launch --app-id fzf-launcher-foot bash -c 'compgen -c | sort -u | fzf | xargs swaymsg exec --'";
+	"Mod4+t" = "exec foot --title music --app-id mpd-control-foot ncmpcpp";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -68,8 +68,8 @@
         "Shift_L+Control_L+F" = "exec playerctl position 10+";
       };
       floating.criteria = [
-        { app_id = "^fzf-launcher$";}
-	{ app_id = "^mpd-control$";}
+        { app_id = "^fzf-launcher-foot$";}
+	{ app_id = "^mpd-control-foot$";}
 	{ con_mark = "DELTARUNE Chapter 1&2";}
       ];
 #  colors = {

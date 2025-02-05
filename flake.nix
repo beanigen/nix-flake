@@ -24,6 +24,7 @@
 	    vars = {
 	      isNixOS = true;
 	      class = "desktop";
+              user = "maya"; #cursed way of setting username
 	    };
 	  };
 	  home-manager.useGlobalPkgs = true;
@@ -41,6 +42,7 @@
         vars = {
           isNixOS = false;
           class = "laptop";
+          user = "maya";
         };
       };
     };

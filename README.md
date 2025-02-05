@@ -56,6 +56,6 @@ This folder is for general assets e.g. wallpapers or stuff I want to show in thi
 ### Things I need to figure out
 - [ ] Manage shell via home-manager so standalone configs will have hm-managed stuff in the path
 - [ ] Move Syncthing config to home-manager so it's across all hosts
-- [ ] Find a way to only declare username once in home.nix so changing username is only one line
+- [x] Find a way to only declare username once in home.nix so changing username is only one line
 - [ ] MAYBE tune sway + waybar configs for touchscreen use (like Sxmo on postmarketOS)
 - [ ] Move stuff like git email and other personally identifiable information to a secret managing system

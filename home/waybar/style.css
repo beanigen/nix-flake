@@ -62,3 +62,6 @@ window#waybar {
 	border-top-left-radius: 10px;
 	background: #e5a6f7; 	
 } 
+#battery.charging {
+	background: @mauve;
+}

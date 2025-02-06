@@ -5,6 +5,7 @@
        extraPkgs = pkgs: [
          wine
          gamescope
+         antimicrox
        ];
 
        extraLibraries =  pkgs: [

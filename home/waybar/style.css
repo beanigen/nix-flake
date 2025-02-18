@@ -9,7 +9,7 @@ window#waybar {
 	border-radius: 10px;
 }
 #clock,
-#wireplumber,
+#audio,
 #mpd,
 #battery {
 	padding: 5px; 
@@ -64,4 +64,8 @@ window#waybar {
 } 
 #battery.charging {
 	background: @mauve;
+}
+#cava {
+        margin-left: 0.2em;
+        color: @mauve;
 }

@@ -9,8 +9,18 @@
     "position": "top",
     "modules-center": ["group/mpdg"],
     "modules-left": ["group/dtray"],
-    "modules-right": ["battery", "battery#bat1", "battery#bat2", "clock", "wireplumber"],
-
+    "modules-right": ["battery", "battery#bat1", "battery#bat2", "clock", "group/audio"],
+    "cava": {
+        "method": "pipewire",
+        "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+        "bar_delimiter": 0,
+        "bars": 12,
+        "stereo": false,
+        "hide_on_silence": true,
+        "input_delay": 1,
+        "autosens": 0,
+        "sensitivity": 13,
+    },
 
     "group/dtray": {
     	"orientation": "inherit",
@@ -19,6 +29,10 @@
 		"transition-left-to-right": true
 	},
     	"modules": ["custom/arrow", "tray"]
+    },
+    "group/audio": {
+        "orientation": "inherit",
+        "modules": ["wireplumber", "cava"]
     },
     "group/mpdg": {
       "orientation": "inherit",
@@ -57,6 +71,7 @@
     "mpd": {
       "on-click": "mpc toggle",
       "format-disconnected": "MPD seems to be down",
+      "format-stopped": "Nothing playing!",
       "format": "{title} - {album} - {artist}",
       "format-paused": "{title} - {album} - {artist}",
     },

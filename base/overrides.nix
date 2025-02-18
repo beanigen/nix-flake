@@ -6,6 +6,7 @@
          wine
          gamescope
          antimicrox
+         sc-controller
        ];
 
        extraLibraries =  pkgs: [

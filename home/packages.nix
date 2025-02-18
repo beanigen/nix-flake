@@ -3,6 +3,7 @@
     prismlauncher
     libgpod
     blender-hip
+    blender-bin.blender_3_3
     libimobiledevice
     mpc
     strawberry

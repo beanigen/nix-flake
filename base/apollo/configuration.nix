@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
+  services.blueman.enable = true;
   programs.steam.enable = true;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

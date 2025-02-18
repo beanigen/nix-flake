@@ -8,6 +8,17 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General.Experimental = true;
+    };
+    input = { 
+      General.ClassicBondedOnly = false;
+      General.UserspaceHID = true;
+    };
+  };
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vhost-net" "v4l2loopback" ];

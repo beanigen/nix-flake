@@ -2,8 +2,8 @@
   home.packages = with pkgs; [
     prismlauncher
     libgpod
+    nextcloud-client
     blender-hip
-    blender-bin.blender_3_3
     libimobiledevice
     mpc
     strawberry

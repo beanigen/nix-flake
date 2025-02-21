@@ -8,6 +8,7 @@
     ./sway.nix
     ./theming.nix
     ./packages.nix #general user packages not managed by home-manager but i want to install via hm anyways
+    ./syncthing.nix #this is a big block of configuration, really dont feel like cluttering this file more than it already is
   ];
   home = rec {
     username = vars.user; #this is set in flake.nix 
@@ -19,6 +20,7 @@
     };
   };
   programs.home-manager.enable = (!vars.isNixOS); #value is set in flake.nix
+  targets.genericLinux.enable = (!vars.isNixOS);
   programs.foot = {
     enable = true;
     settings.main.font = "monospace:size=10";

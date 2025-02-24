@@ -7,7 +7,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     catppuccin.url = "github:catppuccin/nix";
-    nvf.url = "github:notashelf/nvf";
+    nixvim.url = "github:nix-community/nixvim";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -17,6 +17,7 @@
       system = "x86_64-linux";
       modules = [
         ./base/apollo
+	
 	home-manager.nixosModules.home-manager {
 	  #imports = [ inputs.nix-index-database.hmModules.nix-index ];
 	  home-manager.extraSpecialArgs = {
@@ -25,11 +26,12 @@
 	      isNixOS = true;
 	      class = "desktop";
               user = "maya"; #cursed way of setting username
+	      useSyncthing = true; #if this is false, comment out the syncthing ports in ./base/firewall.nix
 	    };
 	  };
 	  home-manager.useGlobalPkgs = true;
 	  home-manager.useUserPackages = true;
-	  home-manager.users.maya = ./home;
+	  home-manager.users.maya = ./home; #change username here too
 	}
       ];
     };
@@ -43,6 +45,7 @@
           isNixOS = false;
           class = "laptop";
           user = "maya";
+	  useSyncthing = true;
         };
       };
     };

@@ -137,7 +137,7 @@
   users.users.maya = {
     isNormalUser = true;
     description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" "input"];
     packages = with pkgs; [
     #  thunderbird
     ];

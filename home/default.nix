@@ -2,9 +2,10 @@
   imports = [
     #home-manager modules
     inputs.nix-index-database.hmModules.nix-index
-    inputs.nvf.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
     inputs.catppuccin.homeManagerModules.catppuccin
     #aux files to make finding specific things easier
+    ./nixvim
     ./sway.nix
     ./theming.nix
     ./packages.nix #general user packages not managed by home-manager but i want to install via hm anyways
@@ -42,6 +43,8 @@
       }
     '';
   };
+  services.syncthing.enable = (vars.useSyncthing);
+  
   services.mpd-mpris = {
     enable = true;
   };
@@ -72,24 +75,4 @@
       obs-pipewire-audio-capture
     ];
   };
-   programs.nvf = {
-      enable = true;
-      settings.vim = {
-        statusline.lualine = {
-          enable = true;
-          theme = "dracula";
-        };
-        autocomplete.nvim-cmp.enable = true;
-        languages = {
-	       enableFormat = true;
-	       enableLSP = true;
-          #enableTreesitter = true; disabled until it fixes itself
-	       nix.enable = true;
-	       clang.enable = true;
-	       html.enable = true;
-          css.enable = true;
-	       python.enable = true;
-	     };
-      };
-    };
 }

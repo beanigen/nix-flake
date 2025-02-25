@@ -20,7 +20,7 @@
     };
   };
   programs.home-manager.enable = (!vars.isNixOS); #value is set in flake.nix
-  targets.genericLinux.enable = (!vars.isNixOS);
+  #targets.genericLinux.enable = (!vars.isNixOS);
   programs.foot = {
     enable = true;
     settings.main.font = "monospace:size=10";

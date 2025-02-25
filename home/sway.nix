@@ -66,6 +66,8 @@
         "XF86Launch1" = "exec nmcli device wifi rescan";
         "Shift_L+Control_L+B" = "exec playerctl position 10-";
         "Shift_L+Control_L+F" = "exec playerctl position 10+";
+	"Mod4+w" = null;
+	"Mod4+s" = null;
       };
       floating.criteria = [
         { app_id = "^fzf-launcher-foot$";}

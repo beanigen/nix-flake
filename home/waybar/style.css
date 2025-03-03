@@ -37,7 +37,9 @@ window#waybar {
 #clock,
 #audio,
 #mpd,
-#battery {
+#battery,
+#cpu,
+#disk {
 	padding: 5px; 
 	border-radius: 10px;
 	border: 0.2em solid #cba6f7;
@@ -94,4 +96,7 @@ window#waybar {
 #cava {
         margin-left: 0.2em;
         color: @mauve;
+}
+#cpu.highcpu {
+	background: @mauve;
 }

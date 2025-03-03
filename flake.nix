@@ -44,7 +44,7 @@
             inherit inputs;
             vars = {
               isNixOS = true;
-              class = "desktop";
+              class = "lowspec";
               user = "maya";
               useSyncthing = true;
             };

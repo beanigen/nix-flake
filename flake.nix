@@ -10,9 +10,17 @@
     nixvim.url = "github:nix-community/nixvim";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-system-graphics = {
+      url = "github:soupglasses/nix-system-graphics";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ...}:{
+  outputs = inputs@{ self, nixpkgs, home-manager, system-manager, ...}:{
     nixosConfigurations."apollo" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -49,6 +57,17 @@
         };
       };
     };
-
+    systemConfigs.default = system-manager.lib.makeSystemConfig {
+      modules = [
+        inputs.nix-system-graphics.systemModules.default
+        ({
+          config = {
+            nixpkgs.hostPlatform = "x86_64-linux";
+            system-manager.allowAnyDistro = true;
+            system-graphics.enable = true;
+          };
+        })
+      ];
+    };
   };
 }

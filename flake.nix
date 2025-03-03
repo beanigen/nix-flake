@@ -43,6 +43,26 @@
 	}
       ];
     };
+    nixosConfigurations."hypermac" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./base/hypermac
+        home-manager.nixosModules.home-manager {
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            vars = {
+              isNixOS = true;
+              class = "lowspec";
+              user = "maya";
+              useSyncthing = true;
+            };
+          };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.maya = ./home;
+        }];
+      };
+
     #other confs go here, cant be assed rn
     homeConfigurations.generic = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { system = "x86_64-linux"; overlays = [inputs.nixgl.overlay]; };

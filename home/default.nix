@@ -33,6 +33,11 @@
       tags_separator = ";";
     };
   };
+  programs.password-store = {
+    enable = true;
+    package = pkgs.pass.withExtensions (exts: [exts.pass-otp]);
+  };
+    
   services.mpd = {
     enable = true;
     musicDirectory = "/home/${vars.user}/Music";

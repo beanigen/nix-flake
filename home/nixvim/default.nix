@@ -1,4 +1,4 @@
-{vars, ...}:{
+{vars, lib, ...}:{
   programs.nixvim = {
     enable = true;
     colorschemes.catppuccin.enable = true;
@@ -22,6 +22,7 @@
       };
       lsp = {
         enable = true;
+
 	servers.nixd = {
 	  enable = true;
 	  extraOptions.offset_encoding = "utf-8";

@@ -8,8 +8,11 @@
     "spacing": 5,
     "position": "top",
     "modules-center": ["group/mpdg"],
-    "modules-left": ["group/dtray"],
-    "modules-right": ["disk", "battery", "battery#bat1", "battery#bat2", "clock", "group/audio", "cpu"],
+    "modules-left": ["group/dtray", "battery", "battery#bat1", "battery#bat2"],
+    "modules-right": ["clock", "group/audio", "disk", "memory", "cpu"],
+    "memory": {
+    	"format": "  {avail} +   {swapAvail} GiB",
+    },
     "cava": {
         "method": "pipewire",
         "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],

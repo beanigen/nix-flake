@@ -15,6 +15,8 @@
     username = vars.user; #this is set in flake.nix 
     homeDirectory = "/home/${username}"; #change this if you use a non-standard home dir
     stateVersion = "23.11";
+    sessionVariables = { PASSWORD_STORE_DIR = "$HOME/sync/general/pass";};
+    shell.enableBashIntegration = true;
     file = {
       ".config/waybar/config".source = config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/.config/nixos/home/waybar/config";
       ".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/.config/nixos/home/waybar/style.css";
@@ -22,6 +24,7 @@
   };
   programs.home-manager.enable = (!vars.isNixOS); #value is set in flake.nix
   #targets.genericLinux.enable = (!vars.isNixOS);
+  
   programs.foot = {
     enable = true;
     settings.main.font = "monospace:size=10";
@@ -36,7 +39,7 @@
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [exts.pass-otp exts.pass-import]);
-    settings = { PASSWORD_STORE_DIR = "~/sync/general/pass"; };
+    settings = { PASSWORD_STORE_DIR = "$HOME/sync/general/pass"; };
   };
     
   services.mpd = {

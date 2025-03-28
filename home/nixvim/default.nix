@@ -22,7 +22,11 @@
       };
       lsp = {
         enable = true;
-
+	servers.cssls.enable = true;
+	servers.pylsp.enable = true;
+	servers.html = {
+	  enable = true;
+	};
 	servers.nixd = {
 	  enable = true;
 	  extraOptions.offset_encoding = "utf-8";

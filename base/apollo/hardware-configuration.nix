@@ -24,7 +24,7 @@
   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vhost-net" "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
   boot.extraModprobeConfig = ''
-    options vfio-pci ids=10de:2184,10de:1aeb,10de:1aec,10de:1aed,1b21:1242
+    options vfio-pci ids=1002:6fdf,1002:aaf0,1b21:1242
     options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam, Virt Cam" exclusive_caps=1
   '';
   boot.blacklistedKernelModules = ["nouveau"];

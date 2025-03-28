@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -15,6 +15,8 @@
     enable = true;
     useRoutingFeatures = "both";
   };
+  programs.adb.enable = true;
+  programs.envision.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -36,6 +38,10 @@
   systemd.packages = with pkgs; [lact];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
   networking.hostName = "apollo"; # Define your hostname.
+  services.udev.extraRules = ''
+  # Qualcomm EDL
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666", GROUP="plugdev"
+'';
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -83,6 +89,14 @@
       user = "greeter";
     };
   };
+  xdg.portal.config.common.default = "*";
+  xdg.portal.wlr.enable = true;
+  xdg.portal.wlr.settings.screencast = {
+    chooser_type = "simple";
+    chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+    exec_before = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-on --skip-wait";
+    exec_after = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-off --skip-wait";
+  };
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
     StandardInput = "tty";
@@ -114,6 +128,8 @@
         };
       };
     })
+
+
   ];
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -138,7 +154,7 @@
   users.users.maya = {
     isNormalUser = true;
     description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" "input"];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" "input" "adbusers"];
     packages = with pkgs; [
     #  thunderbird
     ];

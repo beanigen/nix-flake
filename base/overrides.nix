@@ -1,6 +1,8 @@
 {pkgs, ...}:{
    environment.systemPackages = with pkgs; [
-    
+    (envision.overrideAttrs {
+      buildInputs = [pkgs.mesa];
+    })
     (lutris.override {
        extraPkgs = pkgs: [
          wine

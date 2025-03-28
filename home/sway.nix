@@ -7,6 +7,10 @@
     config = {
       modifier = "Mod4";
       terminal = "foot";
+      output = {
+        "Dell Inc. DELL P2411H MGMHG1681VAU".pos = "0 1050";
+	"Samsung Electric Company SyncMaster HMDQ202016".pos = "75 0";
+      };
       #output = {
         #eDP-1.pos = "0 1362";
        # "Hewlett Packard HP W2371d 6CM2220CSQ".pos = "1366 1050";

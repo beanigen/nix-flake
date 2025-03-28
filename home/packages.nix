@@ -2,8 +2,11 @@
   home.packages = with pkgs; [
     prismlauncher
     libgpod
+    ark
+    qv4l2
     nextcloud-client
     blender-hip
+    cinny-desktop
     libimobiledevice
     mpc
     strawberry

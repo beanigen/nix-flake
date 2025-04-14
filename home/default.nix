@@ -15,7 +15,7 @@
     username = vars.user; #this is set in flake.nix 
     homeDirectory = "/home/${username}"; #change this if you use a non-standard home dir
     stateVersion = "23.11";
-    sessionVariables = { PASSWORD_STORE_DIR = "$HOME/sync/general/pass";};
+    sessionVariables = { PASSWORD_STORE_DIR = "$HOME/sync/general/pass"; ELECTRON_OZONE_PLATFORM_HINT = "auto";};
     shell.enableBashIntegration = true;
     file = {
       ".config/waybar/config".source = config.lib.file.mkOutOfStoreSymlink "${homeDirectory}/.config/nixos/home/waybar/config";

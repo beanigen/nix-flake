@@ -9,6 +9,7 @@
       terminal = "foot";
       output = {
         "Dell Inc. DELL P2411H MGMHG1681VAU".pos = "0 1050";
+	"LG Display 0x0437 Unknown".scale = "1.25";
 	"Samsung Electric Company SyncMaster HMDQ202016".pos = "75 0";
       };
       #output = {

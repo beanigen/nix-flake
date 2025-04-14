@@ -43,6 +43,26 @@
 	}
       ];
     };
+    nixosConfigurations."callisto" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./base/callisto
+        home-manager.nixosModules.home-manager {
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            vars = {
+              isNixOS = true;
+              class = "desktop";
+              user = "maya";
+              useSyncthing = true;
+            };
+          };
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.maya = ./home;
+        }
+      ];
+    };
     nixosConfigurations."hypermac" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [

@@ -2,8 +2,9 @@
   home.packages = with pkgs; [
     prismlauncher
     libgpod
-    ark
-    qv4l2
+    kdePackages.ark
+    vesktop
+    v4l-utils
     nextcloud-client
     blender-hip
     cinny-desktop

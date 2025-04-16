@@ -9,6 +9,7 @@
          gamescope
          antimicrox
          sc-controller
+	 
        ];
 
        extraLibraries =  pkgs: [
@@ -32,6 +33,8 @@
          pkgsi686Linux.xorg.libXi
          pkgsi686Linux.libsndfile
          pkgsi686Linux.libmpg123
+	 gnome2.GConf
+	 
        ];
     })
   ];

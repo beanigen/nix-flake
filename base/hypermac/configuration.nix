@@ -22,27 +22,10 @@
   };
 
   programs.sway.enable = true;
-  services.greetd = {
-    enable = true;
-    restart = true;
-    settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time";
-      user = "greeter";
-    };
-  };
 
   programs.adb.enable = true;
   environment.variables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-  };
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = "true";
-    TTYHangup = "true";
-    TTYVTDisallocate = "true";
   };
   networking.hostName = "hypermac"; # Define your hostname.
   # Pick only one of the below networking options.

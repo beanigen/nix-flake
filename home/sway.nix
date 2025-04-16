@@ -1,9 +1,9 @@
-{lib, osConfig, pkgs, inputs, ...}:{
+{lib, osConfig, pkgs, vars, inputs, ...}:{
   wayland.windowManager.sway = {
     package = pkgs.swayfx;
     enable = true;
     checkConfig = false; #gles2 renderer error
-    extraConfig = import ./swayfx;
+    extraConfig = if (vars.class != "lowspec") then import ./swayfx else "";
     config = {
       modifier = "Mod4";
       terminal = "foot";

@@ -2,74 +2,43 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, fetchFromGitLab, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-  services.blueman.enable = true;
-  programs.steam.enable = true;
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "both";
-  };
-  programs.adb.enable = true;
-  programs.envision.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  programs.virt-manager.enable = true;
-  hardware.keyboard.qmk.enable = true;
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      extraConfig = ''
-        user="maya"
-      '';
-      qemu.ovmf.enable = true;
-      qemu.package = pkgs.qemu_kvm;
-      qemu.runAsRoot = true;
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  systemd.packages = with pkgs; [lact];
-  systemd.services.lactd.wantedBy = ["multi-user.target"];
-  networking.hostName = "apollo"; # Define your hostname.
-  services.udev.extraRules = ''
-  # Qualcomm EDL
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666", GROUP="plugdev"
-'';
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # Bootloader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
+  powerManagement.cpuFreqGovernor = "performance";
+  nix.settings.experimental-features = "nix-command flakes";
+  programs.dconf.enable = true;
+  services.fprintd.enable = true;
+  networking.hostName = "adventurer"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  environment.variables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    PASSWORD_STORE_DIR = "/home/maya/sync/general/pass";
+  };
+  programs.gnupg.agent.enable = true;
+  programs.steam.enable = true;
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [mesa.opencl libvdpau-va-gl vaapiVdpau vulkan-validation-layers];
-    extraPackages32 = with pkgs; [driversi686Linux.amdvlk driversi686Linux.mesa.opencl];
-  };
-  environment.variables = { 
-    ROC_ENABLE_PRE_VEGA = "1";
-  };
-  networking.networkmanager = {
-    enable = true;
-    wifi.backend = "iwd";
-  };
-  programs.gphoto2.enable = true;
+  networking.networkmanager.enable = true;
+
   # Set your time zone.
   time.timeZone = "Australia/Perth";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_AU.UTF-8";
 
-  services.udisks2.enable = true;
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_AU.UTF-8";
     LC_IDENTIFICATION = "en_AU.UTF-8";
@@ -81,39 +50,12 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
     LC_TELEPHONE = "en_AU.UTF-8";
     LC_TIME = "en_AU.UTF-8";
   };
-<<<<<<< HEAD
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  services.greetd = {
-    enable = true;
-    restart = true;
-    settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-      user = "greeter";
-    };
-  };
-  xdg.portal.config.common.default = "*";
-  xdg.portal.wlr.enable = true;
-  xdg.portal.wlr.settings.screencast = {
-    chooser_type = "simple";
-    chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-    exec_before = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-on --skip-wait";
-    exec_after = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-off --skip-wait";
-  };
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = "true";
-    TTYHangup = "true";
-    TTYVTDisallocate = "true";
-  };
-=======
->>>>>>> 6c567ff (help)
 
   # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-  programs.dconf.enable = true;
+  
+  # Enable the KDE Plasma Desktop Environment.
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -123,20 +65,9 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
- nixpkgs.overlays = [
-    (self: super: {
-      vlc = super.vlc.override {
-        libbluray = super.libbluray.override {
-          withAACS = true;
-          withBDplus = true;
-        };
-      };
-    })
 
-
-  ];
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -144,7 +75,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    jack.enable = true;
+    #jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -157,19 +88,17 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.maya = {
     isNormalUser = true;
-    description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" "input" "adbusers"];
+    description = "Maya Wren";
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
-
   # Install firefox.
   programs.firefox.enable = true;
-  services.libinput.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -177,17 +106,15 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
   #  wget
     neovim
     git
-    lact
-    keepassxc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-   programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
-   };
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
 
   # List services that you want to enable:
 

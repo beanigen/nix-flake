@@ -27,6 +27,9 @@
           dwt = "disabled";
           scroll_factor = "0.3";
         };
+	"type:keyboard" = {
+	  xkb_options = "caps:backspace";
+	};
         "1739:0:Synaptics_TM3075-002" = {
           natural_scroll = "enabled";
           click_method = "clickfinger";
@@ -73,6 +76,7 @@
         "Shift_L+Control_L+F" = "exec playerctl position 10+";
 	"Mod4+w" = null;
 	"Mod4+s" = null;
+	
       };
       floating.criteria = [
         { app_id = "^fzf-launcher-foot$";}

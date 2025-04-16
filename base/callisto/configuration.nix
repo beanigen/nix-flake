@@ -103,7 +103,7 @@
       libvdpau-va-gl
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "i965"; ELECTRON_OZONE_PLATFORM_HINT = "wayland";};
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "i965"; ELECTRON_OZONE_PLATFORM_HINT = "wayland"; PASSWORD_STORE_DIR = "$HOME/sync/general/pass";};
   security.polkit.enable = true;
   security.pam = {
     services.gtklock = {};

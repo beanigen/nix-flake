@@ -42,7 +42,7 @@
     },
     "group/audio": {
         "orientation": "inherit",
-        "modules": ["wireplumber", "cava"],
+        "modules": ["wireplumber", ],
 	"on-click": "pavucontrol",
     },
     "group/mpdg": {

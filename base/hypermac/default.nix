@@ -6,5 +6,6 @@
     ../firewall.nix
     ../substituters.nix
     ../fonts.nix
+    ../greetd.nix
   ];
 }

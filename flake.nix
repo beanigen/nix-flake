@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-test.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixgl.url = "github:nix-community/nixGL";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +21,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, system-manager, ...}:{
+  outputs = inputs@{ self, nixpkgs, nixpkgs-test, home-manager, system-manager, ...}:{
     nixosConfigurations."apollo" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -80,9 +81,29 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.maya = ./home;
-        }];
-      };
-
+        }
+      ];
+    };
+    nixosConfigurations."adventurer" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+	./base/adventurer
+	home-manager.nixosModules.home-manager {
+	  home-manager.extraSpecialArgs = {
+	    inherit inputs;
+	    vars = {
+	      isNixOS = true;
+	      class = "lowspec";
+	      user = "maya";
+	      useSyncthing = true;
+	    };
+	  };
+	  home-manager.useGlobalPkgs = true;
+	  home-manager.useUserPackages = true;
+	  home-manager.users.maya = ./home;
+	}
+      ];
+    };
     #other confs go here, cant be assed rn
     homeConfigurations.generic = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { system = "x86_64-linux"; overlays = [inputs.nixgl.overlay]; };

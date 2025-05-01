@@ -11,6 +11,13 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelParams = [ "resume" ];
+  services.undervolt = {
+    enable = true;
+    tempBat = 80;
+    tempAc = 95;
+    coreOffset = -75;
+    gpuOffset = -95;
+  };
   boot.kernelModules = [ "kvm-intel" "sierra_net" ];
   boot.extraModulePackages = [ ];
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;

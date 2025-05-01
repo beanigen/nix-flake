@@ -42,11 +42,7 @@
     },
     "group/audio": {
         "orientation": "inherit",
-<<<<<<< HEAD
         "modules": ["wireplumber", ],
-=======
-        "modules": ["wireplumber"],
->>>>>>> 6c567ff (help)
 	"on-click": "pavucontrol",
     },
     "group/mpdg": {
@@ -96,6 +92,11 @@
       "bat": "BAT0",
       "interval": 5,
       "format-icons": [" ", " ", " ", " ", " "],
+      "states": {
+      	"warning": 30,
+	"critical": 15,
+	"dead": 5
+      },
       "format": "{icon} {capacity}%",
       "tooltip-format": "BAT0, {power}W"
     },
@@ -103,6 +104,11 @@
       "bat": "BAT1",
       "interval": 5,
       "format-icons": [" ", " ", " ", " ", " "],
+      "states": {
+        "warning": 30,
+	"critical": 15,
+	"dead": 5
+      },
       "format": "{icon} {capacity}%",
       "tooltip-format": "BAT1, {power}W"
     },
@@ -110,6 +116,11 @@
       "bat": "BAT2",
       "interval": 5,
       "format-icons": [" ", " ", " ", " ", " "],
+      "states": {
+      	"warning": 30,
+	"critical": 15,
+	"dead": 5
+      },
       "format": "{icon} {capacity}%",
       "tooltip-format": "BAT2, {power}W"
     },

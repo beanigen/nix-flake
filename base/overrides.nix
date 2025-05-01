@@ -9,6 +9,7 @@
          gamescope
          antimicrox
          sc-controller
+	 winetricks
 	 
        ];
 

@@ -22,7 +22,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vhost-net" "v4l2loopback" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback vendor-reset];
   boot.extraModprobeConfig = ''
     options vfio-pci ids=1002:6fdf,1002:aaf0,1b21:1242
     options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam, Virt Cam" exclusive_caps=1
@@ -40,6 +40,16 @@
     { device = "/dev/disk/by-uuid/8DE9-D26C";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
+    };
+  fileSystems."/mnt/vms" = 
+    { device = "/dev/disk/by-uuid/9443885e-d2b3-44a1-aec2-540de7f5c832";
+      fsType = "xfs";
+      options = [ "x-gvfs-show" ];
+    };
+  fileSystems."/mnt/data" = 
+    { device = "/dev/disk/by-uuid/a4a08196-cedc-4be2-988d-d28eb41492c0";
+      fsType = "xfs";
+      options = [ "x-gvfs-show" ];
     };
 
   swapDevices =

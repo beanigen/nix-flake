@@ -42,11 +42,7 @@
     },
     "group/audio": {
         "orientation": "inherit",
-<<<<<<< HEAD
-        "modules": ["wireplumber", ],
-=======
         "modules": ["wireplumber"],
->>>>>>> 6c567ff (help)
 	"on-click": "pavucontrol",
     },
     "group/mpdg": {

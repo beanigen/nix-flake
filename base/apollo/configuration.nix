@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
     ];
   services.blueman.enable = true;
+  services.upower.enable = true;
   programs.steam.enable = true;
   services.tailscale = {
     enable = true;
@@ -22,6 +23,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   programs.virt-manager.enable = true;
+  services.gvfs.enable = true;
   hardware.keyboard.qmk.enable = true;
   virtualisation = {
     libvirtd = {
@@ -29,9 +31,16 @@
       extraConfig = ''
         user="maya"
       '';
-      qemu.ovmf.enable = true;
-      qemu.package = pkgs.qemu_kvm;
-      qemu.runAsRoot = true;
+      onShutdown = "shutdown";
+
+      qemu = {
+        ovmf.enable = true;
+	package = pkgs.qemu_kvm;
+        runAsRoot = true;
+	verbatimConfig = ''
+	  namespaces = []
+	'';
+      };
     };
     spiceUSBRedirection.enable = true;
   };
@@ -68,7 +77,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_AU.UTF-8";
-
+  nix.settings.experimental-features = "nix-command flakes";
   services.udisks2.enable = true;
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_AU.UTF-8";
@@ -81,35 +90,6 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
     LC_TELEPHONE = "en_AU.UTF-8";
     LC_TIME = "en_AU.UTF-8";
   };
-<<<<<<< HEAD
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  services.greetd = {
-    enable = true;
-    restart = true;
-    settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-      user = "greeter";
-    };
-  };
-  xdg.portal.config.common.default = "*";
-  xdg.portal.wlr.enable = true;
-  xdg.portal.wlr.settings.screencast = {
-    chooser_type = "simple";
-    chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-    exec_before = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-on --skip-wait";
-    exec_after = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-off --skip-wait";
-  };
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    StandardOutput = "tty";
-    StandardError = "journal";
-    TTYReset = "true";
-    TTYHangup = "true";
-    TTYVTDisallocate = "true";
-  };
-=======
->>>>>>> 6c567ff (help)
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -120,7 +100,18 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
     layout = "us";
     variant = "";
   };
-
+  xdg.portal.config.common.default = "*";
+  xdg.portal.wlr = {
+    enable = true;
+    settings = {
+      screencast = {
+        chooser_type = "simple";
+        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+        exec_before = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-on --skip-wait";
+        exec_after = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-off --skip-wait";
+      };
+    };
+  };
   # Enable CUPS to print documents.
   services.printing.enable = true;
  nixpkgs.overlays = [
@@ -158,10 +149,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
   users.users.maya = {
     isNormalUser = true;
     description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "camera" "input" "adbusers"];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "qemu-libvirt" "camera" "input" "adbusers"];
   };
 
   # Install firefox.
@@ -179,6 +167,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
     git
     lact
     keepassxc
+    looking-glass-client
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -188,6 +177,9 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
      enable = true;
      enableSSHSupport = true;
    };
+   systemd.tmpfiles.rules = [
+     "f /dev/shm/looking-glass 0660 maya qemu-libvirtd -"
+   ];
 
   # List services that you want to enable:
 

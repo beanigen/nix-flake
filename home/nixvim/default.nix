@@ -23,6 +23,7 @@
       lsp = {
         enable = true;
 	servers.cssls.enable = true;
+	servers.clangd.enable = true;
 	servers.pylsp.enable = true;
 	servers.html = {
 	  enable = true;

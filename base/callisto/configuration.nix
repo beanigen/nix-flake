@@ -24,6 +24,19 @@
       };
     };
   };
+  services.gvfs.enable = true;
+  services.kmonad = {
+    enable = true;
+    keyboards.thinkpad = {
+      device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+      config = (builtins.readFile ./keymap.kbd);
+      defcfg = {
+        enable = true;
+	fallthrough = true;
+	compose.key = null;
+      };
+    };
+  };
   programs.steam.enable = true;
   virtualisation.libvirtd = {
     enable = true;
@@ -86,6 +99,10 @@
   };
 
   services.tlp.enable = true;
+  services.tlp.settings = {
+    CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
+    CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  };
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -124,6 +141,27 @@
 
   networking.hostName = "callisto"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  systemd.services.trackpad-fix = {
+    description = "Fixes the thinkpad touchpad being total shit";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.tcl-8_6}/bin/tclsh /home/maya/unshit.tcl";
+      ExecStop = "pkill tclsh";
+      Restart = "on-failure";
+      };
+    wantedBy = ["default.target"];
+
+    
+    };
+  systemd.services.fuckyou = {
+    description = "h";
+    after = ["suspend.target"];
+    wantedBy = ["suspend.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "systemctl --no-block restart trackpad-fix.service";
+    };
+  };
 
   xdg.portal = {
     enable = true;
@@ -194,7 +232,7 @@
   users.users.maya = {
     isNormalUser = true;
     description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "input" "uinput" ];
     packages = with pkgs; [
     #  thunderbird
       git
@@ -214,6 +252,10 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     lutris
     playerctl
+    undervolt
+    s-tui
+    stress
+    xfsprogs
   #  wget
   ];
 

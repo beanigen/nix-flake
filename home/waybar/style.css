@@ -48,6 +48,17 @@ window#waybar {
 	min-height: 0;
 	margin: 0.2em;
 }
+#battery.warning {
+	border: 0.2em solid @yellow;
+}
+#battery.critical {
+	border: 0.2em solid @red;
+}
+#battery.dead {
+	background: @surface0;
+	color: @surface2;
+	border: 0.2em solid @overlay1;
+}
 #dtray {
 	margin: 0px 10px 0px;
 	padding: 0px 10px 0px;
@@ -58,7 +69,7 @@ window#waybar {
 }
 #mpd.stopped {
 	background-color: @surface0;
-	border: 0;
+	border: 0
 }
 #mpd.playing {
 	background: @mauve;

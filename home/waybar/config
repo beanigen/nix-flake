@@ -13,6 +13,7 @@
     "memory": {
     	"format": "  {avail} +   {swapAvail} GiB",
     },
+
     "cava": {
         "method": "pipewire",
         "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
@@ -25,13 +26,16 @@
 	"noise_reduction": 0.5,
         "sensitivity": 13,
     },
+
     "disk": {
     	"format": "  {free} {path}",
     },
+
     "cpu": {
     	"format": "  {usage}% {max_frequency}GHz",
 	"states": { "highcpu": 85 },
     },
+
     "group/dtray": {
     	"orientation": "inherit",
     	"drawer": {
@@ -40,11 +44,13 @@
 	},
     	"modules": ["custom/arrow", "tray"]
     },
+
     "group/audio": {
         "orientation": "inherit",
         "modules": ["wireplumber", ],
 	"on-click": "pavucontrol",
     },
+
     "group/mpdg": {
       "orientation": "inherit",
       "drawer": {
@@ -54,33 +60,41 @@
       },
       "modules": ["mpd", "custom/playpause", "custom/prev", "custom/next"]
     },
+
     "custom/playpause": {
       "format": "󰐎",
       "on-click": "mpc toggle"
     },
+
     "custom/prev": {
       "format": "󰒮",
       "on-click": "mpc prev"
     },
+
     "custom/next": {
       "format": "󰒭",
       "on-click": "mpc next"
     },
+
     "custom/arrow": {
     	"format": "  ",
 	"tooltip": false
     },
+
     "tray": {
       "spacing": 5
     },
+
     "clock": {
       "format": "{:%I:%M %p}",
     },
+
     "wireplumber": {
       "on-click": "pavucontrol",
       "format": "󰓃 {volume}%",
       "format-muted": "󰓄 {volume}%",
     },
+
     "mpd": {
       "on-click": "mpc toggle",
       "format-disconnected": "MPD seems to be down",
@@ -88,6 +102,7 @@
       "format": "{title} - {album} - {artist}",
       "format-paused": "{title} - {album} - {artist}",
     },
+
     "battery": {
       "bat": "BAT0",
       "interval": 5,
@@ -100,6 +115,7 @@
       "format": "{icon} {capacity}%",
       "tooltip-format": "BAT0, {power}W"
     },
+
     "battery#bat1": {
       "bat": "BAT1",
       "interval": 5,
@@ -112,6 +128,7 @@
       "format": "{icon} {capacity}%",
       "tooltip-format": "BAT1, {power}W"
     },
+
     "battery#bat2": {
       "bat": "BAT2",
       "interval": 5,

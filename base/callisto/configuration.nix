@@ -16,6 +16,7 @@
   #  undockEvent = "${pkgs.wlr-randr}/bin/wlr-randr --output eDP-1 --pos 0,0";
   #};
   programs.gamemode.enable = true;
+
   virtualisation.kvmgt = {
     enable = true;
     vgpus = {
@@ -25,6 +26,7 @@
     };
   };
   services.gvfs.enable = true;
+  programs.thunderbird.enable = true;
   services.kmonad = {
     enable = true;
     keyboards.thinkpad = {
@@ -136,8 +138,26 @@
   services.fprintd.enable = true;
   services.udisks2.enable = true;
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.limine = {
+    enable = true;
+    style.wallpapers = [ ];
+    additionalFiles = {
+      "efi/memtest86/memtest86.efi" = "${pkgs.memtest86-efi}/BOOTX64.efi";
+      "efi/shell.efi" = "${pkgs.edk2-uefi-shell}/shell.efi";
+
+    };
+    extraEntries = ''
+    /memtest86
+      protocol: efi
+      path: boot():/limine/efi/memtest86/memtest86.efi
+    /shell
+      protocol: efi
+      path: boot():/limine/efi/shell.efi
+    '';
+
+  };
+  boot.loader.efi.canTouchEfiVariables = false;
 
   networking.hostName = "callisto"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -256,16 +276,19 @@
     s-tui
     stress
     xfsprogs
+    protonvpn-gui
+    memtest86-efi
+    edk2-uefi-shell
   #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 

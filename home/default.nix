@@ -3,7 +3,7 @@
     #home-manager modules
     inputs.nix-index-database.hmModules.nix-index
     inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     #aux files to make finding specific things easier
     ./nixvim
     ./sway.nix
@@ -23,19 +23,13 @@
     };
   };
   programs.home-manager.enable = (!vars.isNixOS); #value is set in flake.nix
-  #targets.genericLinux.enable = (!vars.isNixOS);
-  
-  programs.foot = {
-    enable = true;
-    settings.main.font = "monospace:size=10";
-    #settings.colors.alpha = "0.8";
-  };
-  programs.ncmpcpp = {
-    enable = true;
-    settings = {
-      tags_separator = ";";
-    };
-  };
+
+  programs.foot.enable = true;
+  programs.foot.settings.main.font = "monospace:size=10";
+
+  programs.ncmpcpp.enable = true;
+  programs.ncmpcpp.settings.tags_separator = ";";
+
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [exts.pass-otp exts.pass-import]);
@@ -51,16 +45,18 @@
         type "pipewire"
 	name "default pipewire"
       }
+      audio_output {
+        type "alsa"
+	name "alsa"
+      }
     '';
   };
   services.syncthing.enable = (vars.useSyncthing);
-  
-  services.mpd-mpris = {
-    enable = true;
-  };
-  programs.waybar = {
-    enable = true;
-  };
+
+  services.mpd-mpris.enable = true;
+
+  programs.waybar.enable = true;
+
   programs.git = {
     enable = true;
     userName = "beanigen";
@@ -72,17 +68,18 @@
       init.defaultBranch = "main";
     };
   };
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
     configPackages = [ pkgs.xdg-desktop-portal-wlr ];
   };
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-backgroundremoval
-      obs-pipewire-audio-capture
-    ];
-  };
+#  programs.obs-studio = {
+#    enable = true;
+#    plugins = with pkgs.obs-studio-plugins; [
+#      wlrobs
+#      obs-backgroundremoval
+#      obs-pipewire-audio-capture
+#    ];
+#  };
 }

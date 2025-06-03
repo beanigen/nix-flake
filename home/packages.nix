@@ -1,48 +1,45 @@
 {pkgs, vars, ...}:{
   home.packages = with pkgs; [
-    prismlauncher
-    libgpod
-    vesktop
-    kdePackages.ark
-    v4l-utils
-    nextcloud-client
     blender-hip
+    brightnessctl
     cinny-desktop
-    libimobiledevice
-    mpc
-    strawberry
-#    lmms
-    kanshi
-    emacs
     comma
+    emacs
+    firefox
+    fzf
+    gamescope
+    gimp
+    grim
+    gtklock
+    gzdoom
+    hyfetch
+    inkscape
+    kanshi
+    kdePackages.ark
+    libgpod
+    libimobiledevice
+    libreoffice
+    mpc
+    nemo
+    nextcloud-client
+    openrct2
     openscad
     openutau
-    wlr-randr
-    grim
-    slurp
-    swaynotificationcenter
-    udiskie
-    gtklock
-    swaybg
-    gzdoom
-    fzf
-    openrct2
-    wl-clipboard
-    brightnessctl
-    nemo
-    xfce.ristretto
-    xfce.tumbler
-    inkscape
-    hyfetch
     pamixer
     pavucontrol
-    gimp
-    prusa-slicer
-    gamescope
-    vlc
     playerctl
-    firefox
+    prismlauncher
+    prusa-slicer
+    slurp
+    swaybg
+    swaynotificationcenter
+    udiskie
     v4l-utils
-    libreoffice
-  ] ++ (if !vars.isNixOS then [nixgl.nixGLIntel] else []);
+    vesktop
+    vlc
+    wl-clipboard
+    wlr-randr
+    xfce.ristretto
+    xfce.tumbler
+  ]; #++ (if !vars.isNixOS then [nixgl.nixGLIntel] else []);
 }

@@ -1,5 +1,3 @@
 {
-  networking.firewall.allowedTCPPorts = [ 22000 ];
-  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
-  #for syncthing
+  services.syncthing.openDefaultPorts = true;
 }

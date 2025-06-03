@@ -37,7 +37,6 @@
 	 gnome2.GConf
 	 icu
 	 openldap
-	 
        ];
     })
   ];

@@ -1,4 +1,4 @@
-{lib, osConfig, pkgs, vars, inputs, ...}:{
+{lib, pkgs, vars, ...}:{
   wayland.windowManager.sway = {
     package = pkgs.swayfx;
     enable = true;
@@ -58,7 +58,7 @@
       workspaceLayout = "default";
       keybindings = lib.mkOptionDefault {
         "Print" = "exec grim -g \"$(slurp)\" ~/Pictures/screenshots/screenshot-`date +%F-%T`.png";
-        "Mod4+d" = "exec foot --title launch --app-id fzf-launcher-foot bash -c 'compgen -c | sort -u | fzf | xargs swaymsg exec --'";
+        "Mod4+d" = "exec foot --title launch --app-id fzf-launcher-foot bash -c 'compgen -c | sort -u | fzf --bind=enter:replace-query+print-query | xargs swaymsg exec --'";
 	"Mod4+t" = "exec foot --title music --app-id mpd-control-foot ncmpcpp";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
@@ -73,7 +73,7 @@
         "XF86AudioMedia" = "exec vlc";
         "XF86Launch1" = "exec nmcli device wifi rescan";
         "Shift_L+Control_L+B" = "exec playerctl position 10-";
-        "Shift_L+Control_L+F" = "exec playerctl position 10+";
+        "Shift_L+Control_L+F" = "exec--bind=enter:replace-query+print-query playerctl position 10+";
 	"Mod4+w" = null;
 	"Mod4+s" = null;
 	
@@ -83,22 +83,6 @@
 	{ app_id = "^mpd-control-foot$";}
 	{ con_mark = "DELTARUNE Chapter 1&2";}
       ];
-#  colors = {
-#    focused = import ./swaycolors.nix;
-#    focused = {
-#      border = "#cba6f7";
-#    };
-#    focusedInactive = import ./swaycolors.nix; 
-#    focusedInactive = {
-#      background = "#440c88"; 
-#      indicator = "#440c88";
-#    };
-#    unfocused = import ./swaycolors.nix; 
-#    unfocused = {
-#      background = "#440c88";
-#      indicator = "#440c88";
-#    };
-#  };
       window = {
         titlebar = false;
       };

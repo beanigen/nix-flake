@@ -5,7 +5,7 @@
     })
     (lutris.override {
        extraPkgs = pkgs: [
-         wine
+	 wineWowPackages.waylandFull
          gamescope
          antimicrox
          sc-controller
@@ -35,6 +35,8 @@
          pkgsi686Linux.libsndfile
          pkgsi686Linux.libmpg123
 	 gnome2.GConf
+	 icu
+	 openldap
 	 
        ];
     })

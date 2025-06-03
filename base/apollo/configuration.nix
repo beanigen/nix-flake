@@ -12,6 +12,7 @@
   services.blueman.enable = true;
   services.upower.enable = true;
   programs.steam.enable = true;
+  services.pcscd.enable = true;
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "both";

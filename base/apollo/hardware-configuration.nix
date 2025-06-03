@@ -20,7 +20,7 @@
     };
   };
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
+  boot.initrd.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" "vendor-reset" ];
   boot.kernelModules = [ "kvm-intel" "vfio_virqfd" "vhost-net" "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback vendor-reset];
   boot.extraModprobeConfig = ''

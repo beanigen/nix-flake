@@ -42,6 +42,7 @@
     settings = { PASSWORD_STORE_DIR = "$HOME/sync/general/pass"; };
   };
     
+  services.mpd-discord-rpc.enable = true;
   services.mpd = {
     enable = true;
     musicDirectory = "/home/${vars.user}/Music";

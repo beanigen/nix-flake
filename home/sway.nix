@@ -21,6 +21,10 @@
         inner = 5;
         outer = 7;
       };
+      assigns = {
+        "9: Mail" = [{ app_id = "thunderbird"; }];
+	"10: Messaging" = [{ app_id = "vesktop"; }];
+      };
       input = {
         "type:touchpad" = {
           accel_profile = "flat";
@@ -73,9 +77,12 @@
         "XF86AudioMedia" = "exec vlc";
         "XF86Launch1" = "exec nmcli device wifi rescan";
         "Shift_L+Control_L+B" = "exec playerctl position 10-";
-        "Shift_L+Control_L+F" = "exec--bind=enter:replace-query+print-query playerctl position 10+";
+        "Shift_L+Control_L+F" = "exec playerctl position 10+";
 	"Mod4+w" = null;
-	"Mod4+s" = null;
+	"Mod4+s" = "scratchpad show";
+	"Mod4+Shift+s" = "move scratchpad";
+	"Mod4+Control+h" = "workspace prev_on_output";
+	"Mod4+Control+l" = "workspace next_on_output";
 	
       };
       floating.criteria = [

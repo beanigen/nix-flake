@@ -47,7 +47,11 @@
       }
       audio_output {
         type "alsa"
-	name "alsa"
+	name "ALSA Direct"
+	mixer_type "hardware"
+	mixer_control "PCM"
+	auto_resample "no"
+	device "hw:0,0"
       }
     '';
   };

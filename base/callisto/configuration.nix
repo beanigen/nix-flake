@@ -252,7 +252,7 @@
   users.users.maya = {
     isNormalUser = true;
     description = "Maya";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "input" "uinput" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "input" "uinput" "dialout" ];
     packages = with pkgs; [
     #  thunderbird
       git

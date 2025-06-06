@@ -78,7 +78,8 @@
 
     "custom/arrow": {
     	"format": "  ",
-	"tooltip": false
+	"tooltip": false,
+	"on-click": "swaync-client -t",
     },
 
     "tray": {

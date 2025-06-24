@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -20,12 +20,13 @@
   virtualisation.kvmgt = {
     enable = true;
     vgpus = {
-      "i915-GVTg_V4_8" = {
+      "i915-GVTg_V4_4" = {
         uuid = [ "b4c3049a-74a1-11ef-8112-df4a4be644fd" ];
       };
     };
   };
   services.gvfs.enable = true;
+  security.sudo.package = pkgs.sudo.override { withInsults = true; };
   programs.thunderbird.enable = true;
   services.kmonad = {
     enable = true;
@@ -100,6 +101,10 @@
     NetworkManager.requires = ["ModemManager.service"];
   };
 
+  programs.niri = {
+    enable = true;
+    package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+  };
   services.tlp.enable = true;
   services.tlp.settings = {
     CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
@@ -185,9 +190,6 @@
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    config.common.default = "*";
   };
 
   # Configure network proxy if necessary
@@ -279,6 +281,7 @@
     protonvpn-gui
     memtest86-efi
     edk2-uefi-shell
+    xwayland-satellite
   #  wget
   ];
 

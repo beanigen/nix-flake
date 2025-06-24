@@ -8,6 +8,7 @@
     catppuccin.url = "github:catppuccin/nix";
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     nixvim.url = "github:nix-community/nixvim";
+    niri.url = "github:sodiboo/niri-flake";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     system-manager = {
@@ -20,7 +21,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, system-manager, nixpkgs-xr, ...}:{
+  outputs = inputs@{ self, nixpkgs, home-manager, system-manager, niri, nixpkgs-xr, ...}:{
     nixosConfigurations."apollo" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
@@ -45,8 +46,10 @@
     };
     nixosConfigurations."callisto" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
       modules = [
         ./base/callisto
+	niri.nixosModules.niri
         home-manager.nixosModules.home-manager {
           home-manager.extraSpecialArgs = {
             inherit inputs;

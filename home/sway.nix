@@ -3,6 +3,7 @@
     package = pkgs.swayfx;
     enable = true;
     checkConfig = false; #gles2 renderer error
+    extraSessionCommands = "export WLR_DRM_DEVICES=/dev/dri/card1";
     extraConfig = if (vars.class != "lowspec") then import ./swayfx else "";
     config = {
       modifier = "Mod4";

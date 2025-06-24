@@ -188,9 +188,9 @@
     };
   };
 
-  xdg.portal = {
+ /* xdg.portal = {
     enable = true;
-  };
+  }; */
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

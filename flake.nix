@@ -62,6 +62,7 @@
           };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+	  home-manager.sharedModules = [{ imports = with inputs; [ nix-index-database.hmModules.nix-index nixvim.homeManagerModules.nixvim catppuccin.homeModules.catppuccin ];}];
           home-manager.users.maya = ./home;
         }
       ];

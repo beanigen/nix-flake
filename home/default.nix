@@ -1,13 +1,10 @@
 {config, pkgs, lib, inputs, vars, ...}:{
   imports = [
-    #home-manager modules
-    inputs.nix-index-database.hmModules.nix-index
-    inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeModules.catppuccin
     #aux files to make finding specific things easier
     ./nixvim
     ./sway.nix
     ./theming.nix
+    ./niri.nix
     ./packages.nix #general user packages not managed by home-manager but i want to install via hm anyways
     ./syncthing.nix #this is a big block of configuration, really dont feel like cluttering this file more than it already is
   ];
@@ -23,9 +20,9 @@
     };
   };
   programs.home-manager.enable = (!vars.isNixOS); #value is set in flake.nix
-
   programs.foot.enable = true;
   programs.foot.settings.main.font = "monospace:size=10";
+  programs.foot.settings.colors.alpha = 0.8;
 
   programs.ncmpcpp.enable = true;
   programs.ncmpcpp.settings.tags_separator = ";";
@@ -90,11 +87,7 @@
     };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-    configPackages = [ pkgs.xdg-desktop-portal-wlr ];
-  };
+
 #  programs.obs-studio = {
 #    enable = true;
 #    plugins = with pkgs.obs-studio-plugins; [

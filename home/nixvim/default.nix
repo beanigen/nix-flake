@@ -31,11 +31,11 @@
 	servers.nixd = {
 	  enable = true;
 	  extraOptions.offset_encoding = "utf-8";
-	  settings.nixpkgs.expr = "import <nixpkgs>{}";
+	  settings.nixpkgs.expr = "import (builtins.getFlake \"/home/${vars.user}/.config/nixos\").inputs.nixpkgs {}";
 	  settings.options = {
-	    nixos.expr = "(builtins.getFlake \"/home/${vars.user}/.config/nixos\").nixosConfigurations.apollo.options";
-	    home-manager.expr = "(builtins.getFlake \"/home/${vars.user}/.config/nixos\").homeConfigurations.generic.options"; 
-	    nixvim.expr = "(builtins.getFlake \"/home/${vars.user}/.config/nixos\").homeConfigurations.generic.options.programs.nixvim.type.getSubOptions []";
+	    nixos.expr = "(builtins.getFlake \"/home/${vars.user}/.config/nixos\").nixosConfigurations.callisto.options";
+	    home-manager.expr = "(builtins.getFlake \"/home/${vars.user}/.config/nixos\").nixosConfigurations.callisto.options.home-manager.users.type.getSubOptions []"; 
+	    #niri.expr = "(builtins.getFlake \"/home/${vars.user}/.config/nixos\").nixosConfigurations.callisto.config.home-manager.users.${vars.user}.programs.niri.settings";
 	  };
 	};
       };

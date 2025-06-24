@@ -15,7 +15,7 @@
     enable = true;
     tempBat = 80;
     tempAc = 95;
-    coreOffset = -75;
+    coreOffset = -73;
     gpuOffset = -95;
   };
   boot.kernelModules = [ "kvm-intel" "sierra_net" ];

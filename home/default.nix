@@ -72,6 +72,23 @@
       init.defaultBranch = "main";
     };
   };
+  programs.irssi = {
+    enable = true;
+    networks = {
+      classicconnect = { 
+        nick = "maya";
+        server = {
+	  address = "irc.classicconnect.net";
+	  port = 6677;
+	  autoConnect = true;
+	  ssl.enable = false;
+	};
+	channels = {
+	  nick.autoJoin = true;
+	};
+      };
+    };
+  };
 
   xdg.portal = {
     enable = true;

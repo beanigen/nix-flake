@@ -6,6 +6,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     catppuccin.url = "github:catppuccin/nix";
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     nixvim.url = "github:nix-community/nixvim";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,11 +20,12 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, system-manager, ...}:{
+  outputs = inputs@{ self, nixpkgs, home-manager, system-manager, nixpkgs-xr, ...}:{
     nixosConfigurations."apollo" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./base/apollo	
+        ./base/apollo
+	nixpkgs-xr.nixosModules.nixpkgs-xr
 	home-manager.nixosModules.home-manager {
 	  #imports = [ inputs.nix-index-database.hmModules.nix-index ];
 	  home-manager.extraSpecialArgs = {

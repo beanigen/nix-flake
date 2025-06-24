@@ -4,6 +4,7 @@
     brightnessctl
     cinny-desktop
     comma
+    wlx-overlay-s
     emacs
     firefox
     fzf

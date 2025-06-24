@@ -12,13 +12,17 @@
   services.blueman.enable = true;
   services.upower.enable = true;
   programs.steam.enable = true;
+  hardware.i2c.enable = true;
   services.pcscd.enable = true;
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "both";
   };
   programs.adb.enable = true;
-  programs.envision.enable = true;
+  services.wivrn.enable = true;
+  services.wivrn.openFirewall = true;
+  services.wivrn.defaultRuntime = true;
+
   powerManagement.cpuFreqGovernor = "performance";
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -46,6 +50,7 @@
     spiceUSBRedirection.enable = true;
   };
   systemd.packages = with pkgs; [lact];
+  services.udev.packages = with pkgs; [xr-hardware];
   systemd.services.lactd.wantedBy = ["multi-user.target"];
   networking.hostName = "apollo"; # Define your hostname.
   services.udev.extraRules = ''
@@ -62,6 +67,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    
     extraPackages = with pkgs; [mesa.opencl libvdpau-va-gl vaapiVdpau vulkan-validation-layers];
     extraPackages32 = with pkgs; [driversi686Linux.amdvlk driversi686Linux.mesa.opencl];
   };
@@ -169,6 +175,9 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="05c6", ATTRS{idProduct}=="9008", MODE="0666
     lact
     keepassxc
     looking-glass-client
+    ddcutil
+    xrizer
+    wayvr-dashboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

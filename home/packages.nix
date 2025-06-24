@@ -1,6 +1,6 @@
 {pkgs, vars, ...}:{
   home.packages = with pkgs; [
-    blender-hip
+    blender
     brightnessctl
     cinny-desktop
     comma

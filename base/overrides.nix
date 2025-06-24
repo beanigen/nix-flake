@@ -34,7 +34,7 @@
          pkgsi686Linux.xorg.libXi
          pkgsi686Linux.libsndfile
          pkgsi686Linux.libmpg123
-	 gnome2.GConf
+#	 gnome2.GConf
 	 icu
 	 openldap
        ];

@@ -28,6 +28,12 @@
         "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+";
         "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-";
         "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+	"XF86AudioPlay".action = spawn "playerctl" "play-pause";
+	"XF86AudioNext".action = spawn "playerctl" "next";
+	"XF86AudioPrev".action = spawn "playerctl" "previous";
+	"XF86AudioStop".action = spawn "playerctl" "stop";
+	"XF86MonBrightnessDown".action = spawn "brightnessctl" "s" "10%-";
+	"XF86MonBrightnessUp".action = spawn "brightnessctl" "s" "+10%";
         "Mod+D".action = spawn "foot" "--title" "launch" "--app-id" "fzf-launcher-foot" "bash" "-c" "niri msg action spawn -- bash -c \"$(compgen -c | sort -u | fzf --bind=enter:replace-query+print-query) >/dev/null\"";
         "Mod+T".action = spawn "foot" "--title" "music" "--app-id" "mpd-control-foot" "ncmpcpp";
         "Mod+Shift+Q" = {
